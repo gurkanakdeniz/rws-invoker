@@ -9,5 +9,6 @@ import com.rws.invoker.core.RestWebServiceWiredProcessor;
 @Import({ RestWebServiceInvokeHandler.class, RestWebServiceWiredProcessor.class })
 @Configuration
 public class RestWebServiceAppConfig {
+    
 
 }
