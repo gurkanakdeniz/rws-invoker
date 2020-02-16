@@ -14,13 +14,13 @@ public class RestWebServiceFactory {
     public static <T> T newInstance(Object bean, Field field, RestWebServiceHandler restWebServiceInvokeHandler) {
         Object newInstance = null;
         try {
-            boolean accessible = field.canAccess(bean);
+//            boolean accessible = field.canAccess(bean);
             field.setAccessible(true);
 
             newInstance = newInstance(field.getType(), restWebServiceInvokeHandler);
             field.set(bean, newInstance);
 
-            field.setAccessible(accessible);
+//            field.setAccessible(accessible);
         } catch (Exception e) {
             e.printStackTrace();
         }
