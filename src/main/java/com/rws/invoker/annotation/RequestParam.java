@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 @Target(value = { ElementType.METHOD, ElementType.TYPE, ElementType.FIELD })
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface RequestParam {
-    
+
+    String name();
+
     String dateFormat() default "yyyy-MM-dd HH:mm:ss";
 }
