@@ -9,5 +9,7 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface PathVariable {
     
+    String name();
+    
     String dateFormat() default "yyyy-MM-dd HH:mm:ss";
 }
