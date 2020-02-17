@@ -17,7 +17,7 @@ public class RestWebServiceEndpoint {
     public RestWebServiceEndpoint(String url, String interfaceName, String interfaceMethod,
             RestWebServiceMethod method) {
         super();
-        init(url, interfaceName, interfaceMethod, method, 0, 0);
+        init(url, interfaceName, interfaceMethod, method, -1, -1);
     }
 
     public RestWebServiceEndpoint(String url, String interfaceName, String interfaceMethod, RestWebServiceMethod method,

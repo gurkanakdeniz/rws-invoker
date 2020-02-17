@@ -15,7 +15,10 @@ public abstract class RestWebServiceConfig {
         return props;
     }
 
-    public Gson mapper() {
+    /**
+     * override if use custom mapper 
+     * */
+    public Gson mapper(RestWebServiceEndpoint endpoint) {
         return new Gson();
     };
 
