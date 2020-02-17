@@ -33,7 +33,6 @@ public class RestWebServiceUtil {
                     }
                 }
             }
-
         }
 
         return response.replaceAll("\\?$", "");
