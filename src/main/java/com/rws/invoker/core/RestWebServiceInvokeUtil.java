@@ -5,6 +5,8 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -18,8 +20,8 @@ public class RestWebServiceInvokeUtil {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
         
         CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
-        HttpGet request = new HttpGet(url);
-        try (CloseableHttpResponse r = httpClient.execute(request)) {
+        HttpGet req = new HttpGet(url);
+        try (CloseableHttpResponse r = httpClient.execute(req)) {
             StatusLine statusLine = r.getStatusLine();
             response.setStatusCode(statusLine.getStatusCode());
             response.setStatus(statusLine.toString());
@@ -29,7 +31,7 @@ public class RestWebServiceInvokeUtil {
         return response;
     }
 
-    public static RestWebServiceInvokeResponse patch(String url, int connectionTimeout, int readTimeout)
+    public static RestWebServiceInvokeResponse patch(String url, String jsonRequest, int connectionTimeout, int readTimeout)
             throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 
@@ -38,13 +40,15 @@ public class RestWebServiceInvokeUtil {
         return response;
     }
 
-    public static RestWebServiceInvokeResponse post(String url, int connectionTimeout, int readTimeout)
+    public static RestWebServiceInvokeResponse post(String url, String jsonRequest, int connectionTimeout, int readTimeout)
             throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 
         CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
-        HttpPost request = new HttpPost(url);
-        try (CloseableHttpResponse r = httpClient.execute(request)) {
+        HttpPost req = new HttpPost(url);
+        StringEntity requestEntity = new StringEntity(jsonRequest, ContentType.APPLICATION_JSON);
+        req.setEntity(requestEntity);
+        try (CloseableHttpResponse r = httpClient.execute(req)) {
             StatusLine statusLine = r.getStatusLine();
             response.setStatusCode(statusLine.getStatusCode());
             response.setStatus(statusLine.toString());
@@ -54,7 +58,7 @@ public class RestWebServiceInvokeUtil {
         return response;
     }
 
-    public static RestWebServiceInvokeResponse put(String url, int connectionTimeout, int readTimeout)
+    public static RestWebServiceInvokeResponse put(String url, String jsonRequest, int connectionTimeout, int readTimeout)
             throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 

@@ -29,11 +29,11 @@ public class RestWebServiceInvoker {
             if (RestWebServiceMethod.GET.equals(methodType)) {
                 invokeResponse = RestWebServiceInvokeUtil.get(url, endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
             } else if (RestWebServiceMethod.PATCH.equals(methodType)) {
-                invokeResponse = RestWebServiceInvokeUtil.patch(url, endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
+                invokeResponse = RestWebServiceInvokeUtil.patch(url, gson.toJson(request), endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
             } else if (RestWebServiceMethod.POST.equals(methodType)) {
-                invokeResponse = RestWebServiceInvokeUtil.post(url, endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
+                invokeResponse = RestWebServiceInvokeUtil.post(url, gson.toJson(request), endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
             } else if (RestWebServiceMethod.PUT.equals(methodType)) {
-                invokeResponse = RestWebServiceInvokeUtil.put(url, endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
+                invokeResponse = RestWebServiceInvokeUtil.put(url, gson.toJson(request), endpoint.getConnectionTimeout(), endpoint.getReadTimeout());
             }
             
             status = invokeResponse.getStatus();
