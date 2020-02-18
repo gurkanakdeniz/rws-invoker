@@ -1,6 +1,6 @@
 # RESTful Web Service Invoker (Spring Boot)
 
-RESTful Web Service Invoker that binds remote rest services to java interfaces similarily to how HttpInvokerProxyFactoryBean works. 
+RESTful Web Service Invoker that binds remote rest services to java interfaces similarily to how InvocationHandler works. 
 
 Invoking methods on those interfaces will make an HTTP request to the remote service and (de)serialize any objects.
 
