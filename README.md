@@ -4,6 +4,11 @@ RESTful Web Service Invoker that binds remote rest services to java interfaces s
 
 Invoking methods on those interfaces will make an HTTP request to the remote service and (de)serialize any objects.
 
+Available methods : **GET, PATCH, POST, PUT**
+
+
+![arch](https://raw.githubusercontent.com/gurkanakdeniz/rws-invoker/master/screen/arch.png "arch")
+
 
 **example use in project** : [https://github.com/gurkanakdeniz/rws-invoker-sample](https://github.com/gurkanakdeniz/rws-invoker-sample) 
 
