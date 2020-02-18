@@ -230,13 +230,27 @@ RES        : {"page":2,"per_page":6,"total":12}
 Request Json:
 
 ```java
-public class ResponsePostModel extends RestWebServiceBaseResponse {
+public class RequestPostModel {
+
     private String name;
     private String job;
-    private String id;
-    private Date createdAt;
-    
-    ...
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
 }
 ```
 
