@@ -3,12 +3,16 @@ package com.rws.invoker.core;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.rws.invoker.config.RestWebServiceHandler;
 
 @Component
 public class RestWebServiceFactory {
+    
+    static Logger logger = LoggerFactory.getLogger(RestWebServiceFactory.class);
 
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(Object bean, Field field, RestWebServiceHandler restWebServiceInvokeHandler) {
@@ -22,7 +26,7 @@ public class RestWebServiceFactory {
 
 //            field.setAccessible(accessible);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("New Instance Error : ", e);
         }
 
         return (T) newInstance;

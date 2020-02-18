@@ -2,7 +2,7 @@ package com.rws.invoker.model;
 
 public enum RestWebServiceMethod {
 
-    GET("GET"), POST("POST"), PATCH("PATCH"), PUT("PUT");
+    GET("GET"), PATCH("PATCH"), POST("POST"), PUT("PUT");
 
     private String method;
 

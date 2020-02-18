@@ -4,7 +4,9 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -18,7 +20,7 @@ public class RestWebServiceInvokeUtil {
     public static RestWebServiceInvokeResponse get(String url, int connectionTimeout, int readTimeout)
             throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
-        
+
         CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
         HttpGet request = new HttpGet(url);
         try (CloseableHttpResponse r = httpClient.execute(request)) {
@@ -31,17 +33,26 @@ public class RestWebServiceInvokeUtil {
         return response;
     }
 
-    public static RestWebServiceInvokeResponse patch(String url, String requestJson, int connectionTimeout, int readTimeout)
-            throws Exception {
+    public static RestWebServiceInvokeResponse patch(String url, String requestJson, int connectionTimeout,
+            int readTimeout) throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 
-        // TODO:GA:
+        CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
+        HttpPatch request = new HttpPatch(url);
+        StringEntity requestEntity = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
+        request.setEntity(requestEntity);
+        try (CloseableHttpResponse r = httpClient.execute(request)) {
+            StatusLine statusLine = r.getStatusLine();
+            response.setStatusCode(statusLine.getStatusCode());
+            response.setStatus(statusLine.toString());
+            response.setResponse(EntityUtils.toString(r.getEntity()));
+        }
 
         return response;
     }
 
-    public static RestWebServiceInvokeResponse post(String url, String requestJson, int connectionTimeout, int readTimeout)
-            throws Exception {
+    public static RestWebServiceInvokeResponse post(String url, String requestJson, int connectionTimeout,
+            int readTimeout) throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 
         CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
@@ -58,11 +69,20 @@ public class RestWebServiceInvokeUtil {
         return response;
     }
 
-    public static RestWebServiceInvokeResponse put(String url, String requestJson, int connectionTimeout, int readTimeout)
-            throws Exception {
+    public static RestWebServiceInvokeResponse put(String url, String requestJson, int connectionTimeout,
+            int readTimeout) throws Exception {
         RestWebServiceInvokeResponse response = new RestWebServiceInvokeResponse();
 
-        // TODO:GA:
+        CloseableHttpClient httpClient = client(connectionTimeout, readTimeout);
+        HttpPut request = new HttpPut(url);
+        StringEntity requestEntity = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
+        request.setEntity(requestEntity);
+        try (CloseableHttpResponse r = httpClient.execute(request)) {
+            StatusLine statusLine = r.getStatusLine();
+            response.setStatusCode(statusLine.getStatusCode());
+            response.setStatus(statusLine.toString());
+            response.setResponse(EntityUtils.toString(r.getEntity()));
+        }
 
         return response;
     }

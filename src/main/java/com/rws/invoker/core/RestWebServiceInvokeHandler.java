@@ -18,9 +18,9 @@ public class RestWebServiceInvokeHandler implements RestWebServiceHandler {
     RestWebServiceConfig config;
 
     @Override
-    public Object invoke(Object arg, Method m, Object[] arg2) throws Throwable {
+    public Object invoke(Object arg, Method m, Object[] args) throws Throwable {
         Object response = null;
-        Object request = (arg2 != null && arg2.length > 0) ? arg2[0] : null;
+        Object request = (args != null && args.length > 0) ? args[0] : null;
 
         HashMap<String, RestWebServiceEndpoint> endpoints = config.endpoints();
         RestWebServiceMethod methodType = RestWebServiceUtil.getMethod(m);
@@ -29,6 +29,7 @@ public class RestWebServiceInvokeHandler implements RestWebServiceHandler {
         if (endpoint != null) {
             RestWebServiceInvoker invoker = new RestWebServiceInvoker();
             response = invoker.invoke(m, request, config.properties(), methodType, endpoint, config.mapper(endpoint));
+            response = RestWebServiceUtil.prepareResponse(response, invoker.getStatus(), invoker.getStatusCode());
         }
 
         return response;

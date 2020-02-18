@@ -14,14 +14,15 @@ import com.rws.invoker.model.RestWebServiceProperties;
 
 public class RestWebServiceInvoker {
     
+    private String status = null;
+    private String statusCode = null;
+    
     Logger logger = LoggerFactory.getLogger(RestWebServiceInvokeHandler.class);
     
     public Object invoke(Method m, Object request, RestWebServiceProperties properties,
             RestWebServiceMethod methodType, RestWebServiceEndpoint endpoint, Gson gson) throws RestWebServiceInvokeException {
         Object response = null;
         
-        String status = null;
-        String statusCode = null;
         String url = RestWebServiceUtil.getUrl(endpoint.getUrl(), request);
         try {
             RestWebServiceInvokeResponse invokeResponse = null; 
@@ -52,18 +53,30 @@ public class RestWebServiceInvoker {
     private void log(Object response, Object request, RestWebServiceProperties properties, Gson gson, String url,
             String status, String statusCode) {
         if (properties.isLogging()) {
-            logger.info("---------REQUEST START-----------");
+            logger.info("");
+            logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            logger.info("-------- REQUEST START ----------");
             logger.info("URL        : " + url);
             logger.info("REQ        : " + gson.toJson(request));
-            logger.info("--------- REQUEST END -----------");
-
-            logger.info("---------RESPONSE START-----------");
+            logger.info("--------  REQUEST END  ----------");
+            logger.info("");
+            logger.info("-------- RESPONSE START ----------");
             logger.info("URL        : " + url);
             logger.info("STATUS     : " + status);
             logger.info("STATUSCODE : " + statusCode);
             logger.info("RES        : " + gson.toJson(response));
-            logger.info("--------- RESPONSE END -----------");
+            logger.info("--------  RESPONSE END  ----------");
+            logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            logger.info("");
         }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
     }
 
 }

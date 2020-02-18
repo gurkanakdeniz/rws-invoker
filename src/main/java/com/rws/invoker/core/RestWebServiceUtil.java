@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.rws.invoker.annotation.PathVariable;
 import com.rws.invoker.annotation.RequestParam;
 import com.rws.invoker.annotation.RestWebServiceType;
+import com.rws.invoker.model.RestWebServiceBaseResponse;
 import com.rws.invoker.model.RestWebServiceEndpoint;
 import com.rws.invoker.model.RestWebServiceMethod;
 
@@ -82,7 +83,7 @@ public class RestWebServiceUtil {
 
         String value = check(fieldValue, requestParam);
         String lastChar = getLastChar(url);
-        if ("?".equals(lastChar) && "&".equals(lastChar)) {
+        if (!("?".equals(lastChar) || "&".equals(lastChar))) {
             url += "&";
         }
 
@@ -138,5 +139,22 @@ public class RestWebServiceUtil {
 
         return enpoint;
     }
+    
+    public static Object prepareResponse(Object obj, String status, String statusCode) {
+        
+        if (obj != null) {
+            if (obj instanceof RestWebServiceBaseResponse) {
+                try {
+                    ((RestWebServiceBaseResponse) obj).setInvokeStatus(status);
+                    ((RestWebServiceBaseResponse) obj).setInvokeStatusCode(statusCode);
+                } catch (Throwable e) {
+                    logger.error("Rest Web Service Base Response Error : ", e);
+                }
+            }
+        }
+        
+        return obj;
+    }
+    
 
 }
