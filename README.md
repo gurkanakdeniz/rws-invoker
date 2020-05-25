@@ -18,7 +18,7 @@ Available methods : **GET, PATCH, POST, PUT**
 <dependency>
 	<groupId>com.rws.invoker</groupId>
 	<artifactId>rws-invoker</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.5</version>
 </dependency> 
 ```
 or alternative :
