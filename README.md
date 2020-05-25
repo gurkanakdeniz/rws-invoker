@@ -15,6 +15,15 @@ Available methods : **GET, PATCH, POST, PUT**
 ### 0. Getting
 
 ```xml
+<dependency>
+	<groupId>com.rws.invoker</groupId>
+	<artifactId>rws-invoker</artifactId>
+	<version>1.0.0</version>
+</dependency> 
+```
+or alternative :
+
+```xml
 <repositories>
 	<repository>
 		<id>jitpack.io</id>
